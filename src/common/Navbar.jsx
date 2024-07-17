@@ -31,20 +31,24 @@ const Navbar = () => {
             <NavLink to={'/'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6  text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 ' >Home</NavLink>
         </li>
 
-        <li>
-            <NavLink to={'/bioDatas'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600'>Biodatas</NavLink>
-        </li>
-        <li>
-            <NavLink to={'/about'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600'>About Us</NavLink>
-        </li>
+
         <li>
             <NavLink to={'/contact'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600'>Contact Us</NavLink>
         </li>
 
         {
-            user && <li>
-                <NavLink to={'/dashboard/EditBiodata'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600'>Dashboard</NavLink>
-            </li>
+            user && <>
+
+                <li>
+                    <NavLink to={'/favorite'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600'>Favorite</NavLink>
+                </li>
+
+                <li>
+                    <NavLink to={'/dashboard/EditBiodata'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600'>Profile</NavLink>
+                </li>
+
+
+            </>
         }
     </>
 
@@ -58,15 +62,27 @@ const Navbar = () => {
                         <Link to={'/'}>
                             <button>
 
-                                <h1 className='text-5xl text-rose-500 flex '>L<span className=''>
-                                    <img
-                                        // className='mb-3'
-                                        // src={LogoImg}
-                                        width={70}
-                                        height={40}
-                                        alt=" logo"
-                                    />
-                                </span>VE</h1>
+                                {user ?
+
+                                    <Link to={'/profile'}>
+                                        <div className="flex flex-col items-center justify-center" >
+                                            <div className="flex space-x-5">
+                                                <img alt="" className="w-12 h-12 rounded-full ring-2 ring-offset-4 dark:bg-gray-500 dark:ring-default-600 dark:ring-offset-gray-100" src={`${user.photoURL}`} />
+                                            </div>
+                                        </div>
+                                    </Link>
+                                    :
+
+                                    <h1 className='text-5xl text-rose-500 flex '>L<span className=''>
+                                        <img
+                                            // className='mb-3'
+                                            // src={LogoImg}
+                                            width={70}
+                                            height={40}
+                                            alt=" logo"
+                                        />
+                                    </span>VE</h1>
+                                }
 
                             </button>
                         </Link>
@@ -102,12 +118,7 @@ const Navbar = () => {
                                 {
                                     user ?
                                         <>
-                                            {/* Profile icon */}
-                                            <div className="flex flex-col items-center justify-center" >
-                                                <div className="flex space-x-5">
-                                                    <img alt="" className="w-12 h-12 rounded-full ring-2 ring-offset-4 dark:bg-gray-500 dark:ring-default-600 dark:ring-offset-gray-100" src={`${user.photoURL}`} />
-                                                </div>
-                                            </div>
+
 
 
                                             {/* Logout */}
