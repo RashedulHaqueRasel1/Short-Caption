@@ -80,9 +80,9 @@ const Login = () => {
             <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
 
 
-                <div className="card shrink-0 w-full p-6 max-w-sm shadow-2xl bg-base-100 border-2 border-blue-200  rounded-3xl  mt-20 lg:mt-20  " style={{ boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px' }}>
+                <div className="card shrink-0 w-full p-6 max-w-sm shadow-2xl bg-[#16233f] border-2 border-blue-200  rounded-3xl  mt-20 lg:mt-20  " style={{ boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px' }}>
 
-                    <h1 className="text-center font-bold mb-10 text-3xl">Login to your account</h1>
+                    <h1 className="text-center font-bold mb-10 text-3xl">Login your account</h1>
 
                     <form className=" " onSubmit={handleSubmit(onSubmit)}>
 
@@ -91,7 +91,7 @@ const Login = () => {
                             <label className="label">
                                 <span className="font-bold ">Email</span>
                             </label>
-                            <input type="email" name="email" placeholder="email" className="input input-bordered border rounded-xl border-blue-300  mt-2"   {...register("email", { required: true })} />
+                            <input type="email" name="email" placeholder="email" className="input input-bordered border rounded-3xl border-blue-300    mt-2"   {...register("email", { required: true })} />
                             {errors.email && <span className="text-red-600 font-bold">This field is required</span>}
                         </div>
 
@@ -140,7 +140,7 @@ const Login = () => {
 
                     <SocialLink></SocialLink>
 
-                    <div className="mt-3">
+                    <div className="mt-4 text-center">
                         <p className="text-[16px] font-medium">Don’t have an account? <Link to={'/registration'} className="hover:text-indigo-600 font-bold text-blue-300">Registration</Link></p>
                     </div>
 

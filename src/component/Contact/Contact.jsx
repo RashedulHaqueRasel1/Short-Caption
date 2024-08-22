@@ -63,7 +63,7 @@ const Contact = () => {
                                                 data-original="#000000" />
                                         </svg>
                                     </div>
-                                    <a href="mailto:rashedulhaquerasel1@gmail.com" className="text-blue-300 text-sm ml-4">
+                                    <a href="mailto:rashedulhaquerasel1@gmail.com" className="text-blue-200 text-sm ml-4">
                                         <strong>rashedulhaquerasel1@gmail.com</strong>
                                     </a>
                                 </li>
@@ -74,7 +74,7 @@ const Contact = () => {
                                     <div className="inline-flex items-center justify-center p-2   ml-6 text-base font-bold leading-6 text-blue-300  border-transparent rounded-full md:w-auto outline outline-offset-2 outline-1 outline-blue-300 hover:bg-blue-300 hover:outline-none  hover:text-white   focus:ring-offset-2 focus:ring-indigo-600 ">
                                         <FaPhoneVolume></FaPhoneVolume>
                                     </div>
-                                    <a href="javascript:void(0)" className="text-blue-300 text-sm ml-4">
+                                    <a href="javascript:void(0)" className="text-blue-200 text-sm ml-4">
                                         <strong>+8801772582460</strong>
                                     </a>
                                 </li>

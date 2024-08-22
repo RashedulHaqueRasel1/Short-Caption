@@ -113,7 +113,7 @@ const Registration = () => {
                 <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
 
 
-                    <div className="card shrink-0 w-full p-6 rounded-3xl lg:max-w-md max-w-sm shadow-2xl bg-base-100 border-2 border-blue-200      " style={{ boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px' }}>
+                    <div className="card shrink-0 w-full p-6 rounded-3xl lg:max-w-md max-w-sm shadow-2xl bg-[#16233f] border-2 border-blue-200      " style={{ boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px' }}>
 
                         <h1 className="text-center font-bold mb-10 text-3xl">Registration</h1>
 
@@ -124,7 +124,7 @@ const Registration = () => {
                                 <label className="label">
                                     <span className="  font-bold ">Name</span>
                                 </label>
-                                <input type="text" name="name" placeholder="Your Name" className="input input-bordered border rounded-xl border-blue-300  mt-2"   {...register("name", { required: true })} />
+                                <input type="text" name="name" placeholder="Your Name" className="input input-bordered border rounded-3xl border-blue-300  mt-2"   {...register("name", { required: true })} />
                                 {errors.name && <span className="text-red-600 font-bold">This field is required</span>}
                             </div>
 
@@ -133,7 +133,7 @@ const Registration = () => {
                                 <label className="label">
                                     <span className="  font-bold ">Email</span>
                                 </label>
-                                <input type="email" name="email" placeholder="Your Email" className="input input-bordered border rounded-xl border-blue-300  mt-2"   {...register("email", { required: true })} />
+                                <input type="email" name="email" placeholder="Your Email" className="input input-bordered border rounded-3xl border-blue-300  mt-2"   {...register("email", { required: true })} />
                                 {errors.email && <span className="text-red-600 font-bold">This field is required</span>}
                             </div>
 
@@ -171,7 +171,7 @@ const Registration = () => {
                                 <label className="label">
                                     <span className="  font-bold ">Photo Url</span>
                                 </label>
-                                <input type="text" name="photo" placeholder="Photo URL" className="input input-bordered border rounded-xl border-blue-300  mt-2"   {...register("photo", { required: true })} />
+                                <input type="text" name="photo" placeholder="Photo URL" className="input input-bordered border rounded-3xl border-blue-300  mt-2"   {...register("photo", { required: true })} />
                                 {errors.photo && <span className="text-red-600 font-bold">This field is required</span>}
                             </div>
 
@@ -187,7 +187,7 @@ const Registration = () => {
 
                         <SocialLink></SocialLink>
 
-                        <div className="mt-3">
+                        <div className="mt-4 text-center">
                             <p className="text-[16px] font-medium">Already have an account?<Link to={'/login'} className="hover:text-indigo-600 font-bold text-blue-300"> Login</Link></p>
                         </div>
 

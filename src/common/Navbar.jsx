@@ -44,7 +44,7 @@ const Navbar = () => {
                 </li>
 
                 <li>
-                    <NavLink to={'/dashboard/EditBiodata'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600'>Profile</NavLink>
+                    <NavLink to={'/profile'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600'>Profile</NavLink>
                 </li>
 
 
@@ -56,7 +56,7 @@ const Navbar = () => {
     return (
         <div>
 
-            <nav className=" bg-slate-700 border-b w-full md:static md:text-sm md:border-none fixed z-50">
+            <nav className=" bg-[#16233f] border-b w-full md:static md:text-sm md:border-none fixed z-50">
                 <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8  ">
                     <div className="flex items-center justify-between py-3 md:py-5 md:block">
                         <Link to={'/'}>
@@ -73,23 +73,18 @@ const Navbar = () => {
                                     </Link>
                                     :
 
-                                    <h1 className='text-5xl text-rose-500 flex '>L<span className=''>
-                                        <img
-                                            // className='mb-3'
-                                            // src={LogoImg}
-                                            width={70}
-                                            height={40}
-                                            alt=" logo"
-                                        />
-                                    </span>VE</h1>
+                                    <h1 className='text-4xl text-indigo-600 flex '>Short<span className='text-white'>Caption</span></h1>
                                 }
 
                             </button>
                         </Link>
                         <div className="md:hidden">
-                            <button className="text-gray-500 hover:text-gray-800"
+
+                            
+                            <button className="text-gray-500  hover:text-gray-800"
                                 onClick={() => setState(!state)}
                             >
+
                                 {
                                     state ? (
 
@@ -111,6 +106,7 @@ const Navbar = () => {
 
                             {navOption}
 
+ 
 
                             <span className='hidden w-px h-6 bg-gray-300 md:block'></span>
                             <div className='space-y-3 items-center gap-x-6 md:flex md:space-y-0'>

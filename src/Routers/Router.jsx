@@ -4,6 +4,10 @@ import Home from "../Pages/Home";
 import Login from "../component/Login/Login";
 import Registration from "../component/Registration/Registration";
 import Contact from "../component/Contact/Contact";
+import AddCaption from "../component/AddCaption/AddCaption";
+import AllCaption from "../component/AllCaption/AllCaption";
+import Favorite from "../component/Favorite/Favorite";
+import Profile from "../component/Profile/Profile";
 
 
 export const router = createBrowserRouter([
@@ -17,7 +21,7 @@ export const router = createBrowserRouter([
 
             },
             {
-                path: '/login',
+                path: 'login',
                 element: <Login></Login>
             },
             {
@@ -27,6 +31,22 @@ export const router = createBrowserRouter([
             {
                 path: 'contact',
                 element: <Contact></Contact>
+            },
+            {
+                path: 'ARasel',
+                element: <AddCaption></AddCaption>
+            },
+            {
+                path: 'DRasel',
+                element: <AllCaption></AllCaption>
+            },
+            {
+                path: 'favorite',
+                element: <Favorite></Favorite>
+            },
+            {
+                path: 'profile',
+                element: <Profile></Profile>
             }
         ]
     }

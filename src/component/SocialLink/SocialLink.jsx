@@ -63,7 +63,7 @@ const SocialLink = () => {
             <div>
 
                 <div className="">
-                    <button onClick={handleGoogleSignIn} aria-label="Log in with Google" className="p-4 w-full   rounded-3xl   hover:bg-transparent outline text-black hover:text-black mr-3 mt-4" >
+                    <button onClick={handleGoogleSignIn} aria-label="Log in with Google" className="p-4 w-full   rounded-3xl   hover:bg-transparent outline text-black hover:text-black hover:bg-[#16233f] mr-3 mt-4" >
 
                         <div className="flex justify-center">
                             <FcGoogle className="text-2xl"></FcGoogle>
