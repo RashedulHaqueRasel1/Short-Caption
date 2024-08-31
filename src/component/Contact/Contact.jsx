@@ -40,13 +40,13 @@ const Contact = () => {
         <div>
 
             <div className="text-clip">
-                <h1 className="text-4xl lg:text-5xl lg:ml-[650px] lg:mt-32 font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8954F7] to-[#ffff] inline-flex text-center">Contact Us</h1>
+                <h1 className="text-4xl lg:text-5xl mt-28 ml-24 lg:ml-[770px] lg:mt-28 font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8954F7] to-[#ffff] inline-flex text-center">Contact Us</h1>
             </div>
 
 
 
 
-            <div className="mt-10">
+            <div className="lg:mb-48">
                 <div className="grid sm:grid-cols-2 items-start gap-14 p-8 mx-auto max-w-4xl  ">
                     <div>
 
@@ -71,7 +71,7 @@ const Contact = () => {
 
                             <ul className="mt-4">
                                 <li className="flex items-center">
-                                    <div className="inline-flex items-center justify-center p-2   ml-6 text-base font-bold leading-6 text-blue-300  border-transparent rounded-full md:w-auto outline outline-offset-2 outline-1 outline-blue-300 hover:bg-blue-300 hover:outline-none  hover:text-white   focus:ring-offset-2 focus:ring-indigo-600 ">
+                                    <div className="inline-flex items-center justify-center p-2   ml-6 text-base font-bold leading-6 text-blue-300  border-transparent rounded-full md:w-auto outline outline-offset-2 outline-1 outline-blue-300 hover:bg-blue-300 hover:outline-none  hover:text-black    focus:ring-offset-2 focus:ring-indigo-600 ">
                                         <FaPhoneVolume></FaPhoneVolume>
                                     </div>
                                     <a href="javascript:void(0)" className="text-blue-200 text-sm ml-4">
@@ -84,7 +84,7 @@ const Contact = () => {
                         <div className="mt-12">
                             <h2 className="  text-white text-2xl font-bold">Socials</h2>
 
-                            <div className="lg:inline-flex inline-flex mt-4">
+                            <div className="lg:inline-flex inline-flex mt-4 ">
                                 {/* GitHub */}
                                 <NavLink to={'https://www.linkedin.com/in/rashedul-haque-rasel1/'} className='inline-flex items-center justify-center p-2   ml-6 text-base font-bold leading-6 text-blue-300  border-transparent rounded-full md:w-auto outline outline-offset-2 outline-1 outline-blue-300 hover:bg-blue-300 hover:outline-none  hover:text-white   focus:ring-offset-2 focus:ring-indigo-600 '> <RiLinkedinFill className="    text-xl"></RiLinkedinFill></NavLink>
                             </div>

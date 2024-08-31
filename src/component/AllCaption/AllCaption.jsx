@@ -1,12 +1,12 @@
 import Swal from "sweetalert2";
-import useAllCaption from "../../hook/useAllCaption";
 import useAxiosPublic from "../../hook/useAxiosPublic";
 import { MdDeleteForever } from "react-icons/md";
+import useCaption from "../../hook/useCaption";
 
 const AllCaption = () => {
 
 
-    const [allCaption, refetch] = useAllCaption();
+    const [allCaption, refetch] = useCaption();
 
 
     const axiosPublic = useAxiosPublic();
@@ -25,7 +25,7 @@ const AllCaption = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axiosPublic.delete(`/caption/${id}`)
+                axiosPublic.delete(`/adminCaption/${id}`)
                     .then((res) => {
                         if (res.data.deletedCount > 0) {
                             Swal.fire({
@@ -55,8 +55,9 @@ const AllCaption = () => {
                     {/* head */}
                     <thead>
                         <tr className="border border-blue-300 rounded-2xl font-bold  text-xs text-white">
+                            <th>Number</th>
                             <th>Caption</th>
-                            <th>status</th>
+                            <th>Status</th>
                             <th>Delete</th>
 
                         </tr>
@@ -64,6 +65,10 @@ const AllCaption = () => {
                     <tbody>
                         {/* row 1 */}
                         {allCaption?.map(caption => <tr key={caption._id} className=" bg-blue-200 hover:bg-blue-300 rounded-2xl">
+
+                            <td className="text-black font-medium">
+                                {caption.captionNumber}
+                            </td>
 
                             <td className="text-black font-medium">
                                 {caption.caption}

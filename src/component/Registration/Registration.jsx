@@ -154,7 +154,7 @@ const Registration = () => {
 
                                     <span onClick={() => setShowPassword(!showPassword)} className="cursor-pointer ">
                                         {
-                                            showPassword ? <FaRegEye className="ml-16" /> : <FaRegEyeSlash className="ml-16" />
+                                            showPassword ? <FaRegEye className="ml-7 lg:ml-28" /> : <FaRegEyeSlash className="ml-7 lg:ml-28" />
                                         }
                                     </span>
 

@@ -1,10 +1,11 @@
-// import { useEffect, useState } from "react";
-
+import { useContext, useState } from "react";
+import { BsSuitHeart } from "react-icons/bs";
+import { AuthContext } from "../Auth/Provider/AuthProvider";
+import useAxiosSecure from "../useHook/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-
-// Share Caption
-
+// import icon
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -15,12 +16,6 @@ import {
   LinkedinShareButton,
   LinkedinIcon
 } from 'react-share';
-
-import { useContext, useState } from "react";
-import { BsSuitHeart } from "react-icons/bs";
-import { AuthContext } from "../Auth/Provider/AuthProvider";
-import useAxiosSecure from "../useHook/useAxiosSecure";
-
 
 
 const ShareButtons = ({ url, title }) => (
@@ -44,7 +39,7 @@ const ShareButtons = ({ url, title }) => (
 const AllCard = ({ allCaption }) => {
 
   const { user } = useContext(AuthContext)
-  // console.log(user)
+  const navigation = useNavigate();
   const [showShareButtons, setShowShareButtons] = useState(false);
   const axiosSecure = useAxiosSecure();
   const utcDate = new Date();
@@ -59,10 +54,11 @@ const AllCard = ({ allCaption }) => {
   const year = bstDate.getUTCFullYear();
   const formattedBstDate = `${day}/${month}/${year}`;
 
+
+
   // copy Caption
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text).then(() => {
-      // alert(''); 
       Swal.fire({
         position: "top-center",
         icon: "success",
@@ -76,17 +72,22 @@ const AllCard = ({ allCaption }) => {
 
 
 
+  //  Check User Login or Log out
+  const handleFavoriteClick = () => {
+    if (user) {
+      addToFavorites(allCaption);
+    } else {
+      redirectToLogin();
+    }
+  };
 
 
-  // Add to Faviouret mongoDB Faviouret collection
-
-  const handleAddFavorite = async (allCaption) => {
-    // console.log(bio)
+  //user login than  Add to caption Favorite MongoDB Favorite collection
+  const addToFavorites = async (allCaption) => {
 
     const userInfo = {
       caption: allCaption?.caption,
       date: formattedBstDate,
-      status: 'Pending',
       email: user?.email,
 
     }
@@ -102,32 +103,38 @@ const AllCard = ({ allCaption }) => {
         timer: 1500
       });
     }
-    // refetch()
-  }
 
+  };
 
+  // user not login , redirect to login page
+  const redirectToLogin = () => {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Login First",
+      footer: '<a href="#">Why do I have this issue?</a>'
+    });
+    navigation('/login')
+  };
 
 
   const currentUrl = window.location.href;
 
   return (
-    <div className="mt-6 ">
+    <div className="mt-2">
 
       <div className="card bg-[#16233f] text-white  justify-center">
 
         <div className="card-body">
+          <p className="text-rose-800 font-medium text-center">{allCaption.captionNumber}</p>
           <h2 className="card-title text-xl text-center">
             {allCaption.caption}
           </h2>
           <div className="card-actions justify-center mt-4">
             <div onClick={() => handleCopy(allCaption.caption)} className="badge badge-outline p-5 hover:bg-indigo-600 cursor-pointer">Copy</div>
-            {
-              user ? <>
-                <div onClick={() => handleAddFavorite(allCaption)} className="badge badge-outline p-5 hover:bg-indigo-600 cursor-pointer"><BsSuitHeart /></div>
-              </>
-                :
-                <></>
-            }
+
+            <div onClick={() => handleFavoriteClick(allCaption)} className="badge badge-outline p-5 hover:bg-indigo-600 cursor-pointer "  ><BsSuitHeart /></div>
+
             <button className="badge badge-outline p-5 hover:bg-indigo-600 cursor-pointer" onClick={() => setShowShareButtons(!showShareButtons)}>
               {showShareButtons ? 'Close Share Options' : 'Share'}
             </button>

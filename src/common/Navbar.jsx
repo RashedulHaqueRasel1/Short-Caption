@@ -31,13 +31,9 @@ const Navbar = () => {
             <NavLink to={'/'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6  text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 ' >Home</NavLink>
         </li>
 
-
-        <li>
-            <NavLink to={'/contact'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600'>Contact Us</NavLink>
-        </li>
-
         {
             user && <>
+
 
                 <li>
                     <NavLink to={'/favorite'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600'>Favorite</NavLink>
@@ -50,6 +46,12 @@ const Navbar = () => {
 
             </>
         }
+
+        <li>
+            <NavLink to={'/contact'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600'>Contact Us</NavLink>
+        </li>
+
+
     </>
 
 
@@ -80,7 +82,7 @@ const Navbar = () => {
                         </Link>
                         <div className="md:hidden">
 
-                            
+
                             <button className="text-gray-500  hover:text-gray-800"
                                 onClick={() => setState(!state)}
                             >
@@ -106,7 +108,7 @@ const Navbar = () => {
 
                             {navOption}
 
- 
+
 
                             <span className='hidden w-px h-6 bg-gray-300 md:block'></span>
                             <div className='space-y-3 items-center gap-x-6 md:flex md:space-y-0'>

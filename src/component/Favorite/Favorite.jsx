@@ -9,42 +9,40 @@ const Favorite = () => {
     const axiosSecure = useAxiosSecure();
 
 
-        // Delete Favorite Data in User
-        const handleDelete = (id) => {
-            // console.log(id)
-            Swal.fire({
-                title: "Are you sure?",
-                text: "Are you sure Favorite Data deleted ?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-    
-                    axiosSecure.delete(`/favorite/${id}`)
-                        .then((res) => {
-                            if (res.data.deletedCount > 0) {
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Your Favorite Data has been deleted.",
-                                    icon: "success"
-                                });
-                                refetch();
-                            }
-                        })
-                }
-                refetch()
-            });
-        }
+    const handleDelete = (id) => {
+        // console.log(id)
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Are you sure Favorite Caption deleted ?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // console.log(result.isConfirmed)
+                axiosSecure.delete(`/favorite/${id}`)
+                    .then((res) => {
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your Favorite Caption has been deleted.",
+                                icon: "success"
+                            });
+                            refetch();
+                        }
+                    })
+            }
+            refetch()
+        });
+    }
 
 
-    console.log(allFavorite)
 
 
     return (
-        <div className="mx-auto container">
+        <div className="mx-auto container mb-20">
 
 
             <div className="overflow-x-auto">
@@ -73,7 +71,7 @@ const Favorite = () => {
 
 
                             <td className="px-6 py-4">
-                                <button onClick={() => handleDelete(favorite?._id)}  className="inline-flex items-center   justify-center w-full px-4 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-500 bg-indigo-600 hover:bg-transparent hover:outline hover:text-black cursor-pointer"><MdDeleteForever /></button>
+                                <button onClick={() => handleDelete(favorite?._id)} className="inline-flex items-center   justify-center w-full px-4 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-500 bg-indigo-600 hover:bg-transparent hover:outline hover:text-black cursor-pointer"><MdDeleteForever /></button>
                             </td>
 
                         </tr>)}

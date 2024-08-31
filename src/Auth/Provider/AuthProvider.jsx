@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from "../Firebase/Firebase.config";
 // import useAxiosPublic from "../../hook/useAxiosPublic/useAxiosPublic";
- 
+
 
 
 export const AuthContext = createContext(null);
@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
     const googleProvider = new GoogleAuthProvider();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+
     // const axiosPublic = useAxiosPublic();
 
 
@@ -32,7 +33,7 @@ const AuthProvider = ({ children }) => {
 
 
     // Google LogIn
-    const googleLogin = () =>{
+    const googleLogin = () => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider);
     }
@@ -40,10 +41,10 @@ const AuthProvider = ({ children }) => {
 
     // UpdateProfile
 
-    const userUpdateProfile = (name, photo) =>{
+    const userUpdateProfile = (name, photo) => {
         return updateProfile(auth.currentUser, {
             displayName: name, photoURL: photo
-          });
+        });
     }
 
 
@@ -55,11 +56,14 @@ const AuthProvider = ({ children }) => {
 
 
 
+ 
+
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
 
             setUser(currentUser);
-            
+
             setLoading(false);
 
             // if (currentUser) {
@@ -92,7 +96,7 @@ const AuthProvider = ({ children }) => {
         signIn,
         googleLogin,
         logOut,
-        userUpdateProfile
+        userUpdateProfile,
 
     }
 
