@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
 
-const useAllCaption = (search,currentPage, itemPerPage) => {
+const useAllCaption = (search) => {
 
 
     const axiosPublic = useAxiosPublic();
@@ -10,7 +10,7 @@ const useAllCaption = (search,currentPage, itemPerPage) => {
     const { data: allCaption = [], refetch } = useQuery({
         queryKey: ['allCaption'],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/allCaption?page=${currentPage}&size=${itemPerPage}&search=${search}`)
+            const res = await axiosPublic.get(`/allCaption?search=${search}`)
             // console.log(res.data)
             return res.data;
         },

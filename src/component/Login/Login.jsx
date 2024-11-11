@@ -53,9 +53,11 @@ const Login = () => {
                 const logInUser = result.user;
                 console.log(logInUser)
                 Swal.fire({
-                    title: "LogIn Success!",
-                    text: "Congratulations! Well Come Your Website.",
-                    icon: "success"
+                    position: "top-center",
+                    icon: "success",
+                    title: `Congratulations! Well Come Your Website.`,
+                    showConfirmButton: false,
+                    timer: 1500
                 });
 
                 navigation('/')

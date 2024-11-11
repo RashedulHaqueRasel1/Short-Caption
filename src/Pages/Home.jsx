@@ -1,146 +1,123 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import AllCard from "./AllCard";
 import useAllCaption from "../hook/useAllCaption";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import { AuthContext } from "../Auth/Provider/AuthProvider";
-import { IoSearch } from "react-icons/io5";
-import useCaptionCount from "../hook/useCaptionCount";
-
-
+import Search from "./Search";
+// import { IoSearch } from "react-icons/io5";
 
 const Home = () => {
+    // const [search, setSearch] = useState('');
+    const [shuffledCaptions, setShuffledCaptions] = useState([]);
 
-    const [search, setSearch] = useState('');
-    // const [itemPerPage, setItemPerPage] = useState(12)
-    const itemPerPage = 12 ;
-    const [currentPage, SetCurrentPage] = useState(0);
+    // Fetch captions with search and pagination
+    const [allCaption, refetch] = useAllCaption();
+    const { loading } = useContext(AuthContext);
 
-    const [allCaption, refetch] = useAllCaption(search, currentPage, itemPerPage);
-    const [captionCount] = useCaptionCount();
-    const { loading } = useContext(AuthContext)
+    // Shuffle captions on each refresh
+    useEffect(() => {
+        if (allCaption.length > 0) {
+            const shuffled = [...allCaption].sort(() => Math.random() - 0.5);
+            setShuffledCaptions(shuffled);
+            
+        }
+    }, [allCaption]);
 
-
-    // pagination
-    const { count } = captionCount;
-    const numberOfPages = Math.ceil(count / itemPerPage)
-
-    // console.log(numberOfPages)
-
-    const pages = []
-    for (let i = 0; i < numberOfPages; i++) {
-        pages.push(i)
-
-    }
-
-    // // Page Select 
-    // const handleItemPerPage = e => {
-    //     const val = parseInt(e.target.value)
-    //     setItemPerPage(val)
-    //     SetCurrentPage(0)
-    // }
-
-
-
-    // Search Bar Handle
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm()
-
-    const onSubmit = (data) => {
-        setSearch(data.search)
-        refetch()
-    }
     refetch()
 
+    // // Search Bar Handle
+    // const { register, handleSubmit } = useForm();
+    // const onSubmit = (data) => {
+    //     // setSearch(data.search);
+    //     refetch();
+    // };
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 9;
 
+    // Pagination calculations
+    const totalPages = Math.ceil(shuffledCaptions.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const currentCaption = shuffledCaptions.slice(startIndex, startIndex + itemsPerPage);
 
-    // handle Prev Page
-    const handlePrevPage = () => {
-        if (currentPage > 0) {
-            SetCurrentPage(currentPage - 1)
-            refetch()
-        }
-    }
-
-    // handle Next Page
+    const handlePageClick = (pageNumber) => setCurrentPage(pageNumber);
+    const handlePreviousPage = () => {
+        if (currentPage > 1) setCurrentPage(currentPage - 1);
+    };
     const handleNextPage = () => {
-        if (currentPage < pages.length - 1) {
-            SetCurrentPage(currentPage + 1)
-            refetch()
+        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    };
+
+    const getPageNumbers = () => {
+        const pageNumbers = [];
+        const maxVisiblePages = 3;
+        let startPage = Math.max(1, currentPage - 1);
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+        if (endPage - startPage < maxVisiblePages - 1) {
+            startPage = Math.max(1, endPage - (maxVisiblePages - 1));
         }
+
+        for (let i = startPage; i <= endPage; i++) {
+            pageNumbers.push(i);
+        }
+
+        return pageNumbers;
+    };
+
+    // Show loading indicator
+    if (loading) {
+        return (
+            <div className="flex gap-4 p-4 flex-wrap justify-center">
+                <img
+                    className="w-48 h-48 animate-spin mt-32 lg:mt-32 lg:mb-32"
+                    src="https://www.svgrepo.com/show/199956/loading-loader.svg"
+                    alt="Loading icon"
+                />
+            </div>
+        );
     }
-
-
-
-    // Loading 
-    if (loading) return <div className="flex gap-4  p-4 flex-wrap justify-center">
-        <img className="w-48 h-48 animate-spin mt-32  lg:mt-32 lg:mb-32 " src="https://www.svgrepo.com/show/199956/loading-loader.svg" alt="Loading icon"></img>
-    </div>;
-
-    refetch()
-
 
     return (
         <div className="mx-auto container">
-
-
-            {/*-------------- Search Input Start -----------*/}
-            <div className="">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="flex relative justify-center lg:ml-96 rounded-md w-full px-4 max-w-xl   lg:mt-0">
-                        <input type="text" placeholder="Search Caption..."
-                            className="w-full p-3 rounded-md mt-24 md:mt-4 md:ml-28 lg:mt-4   border-blue-300   input-bordered border       "
-                            {...register("search")} />
-                        {errors.search}
-                        <button
-                            className="inline-flex items-center mt-24 md:mt-4 lg:mt-4   gap-2 bg-indigo-600 hover:bg-indigo-500 text-white text-lg font-semibold   px-3 rounded-r-md">
-                            <span>search</span>
-                            <span className="hidden md:block">
-                                <IoSearch />
-                            </span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-            {/*-------------- Search Input End -----------*/}
-
-
-
-
-            {/* All card Map */}
-            <div className="grid grid-cols-1 justify-center items-center p-4 space-x-4 md:grid-cols-2 lg:grid-cols-3">
-                {
-                    allCaption.map((allCaption) => <AllCard key={allCaption._id} allCaption={allCaption}></AllCard>)
-                }
+            {/* Search Input */}
+            <div className="p-4">
+                <Search></Search>
             </div>
 
-
-
-            {/* ----------- Pagination Star ---------- */}
-            <div className="text-center mb-6 mt-4 ">
-                <button onClick={handlePrevPage} className="btn mr-3 hover:text-blue-500 ">Prev</button>
-                {
-                    pages.map((page, idx) => <button
-                        onClick={() => SetCurrentPage(page)}
-                        key={page + 1}
-                        className={currentPage === page ? `bg-blue-200 btn text-black hover:text-white ml-2` : `btn bg-blue-600  text-black hover:text-white ml-2`}
-                    >{idx + 1}</button>)
-                }
-                <button onClick={handleNextPage} className="btn ml-3 hover:text-blue-500 ">Next</button>
-
-                {/* <select value={itemPerPage} onChange={handleItemPerPage} className="select select-primary w-20 ml-4">
-                    <option value='5'>12</option>
-                    <option value='10'>21</option>
-                    <option value='15'>35</option>
-                    <option value='20'>50</option>
-                </select> */}
+            {/* Caption Cards */}
+            <div className="grid grid-cols-1 justify-center p-4 gap-4 lg:mt-4 md:grid-cols-2 lg:grid-cols-3">
+                {currentCaption.map((caption) => (
+                    <AllCard key={caption._id} allCaption={caption} />
+                ))}
             </div>
-            {/* ----------- Pagination End ---------- */}
 
-
+            {/* Pagination */}
+            <div className="flex justify-center mt-6 mb-8 gap-2">
+                <button
+                    onClick={handlePreviousPage}
+                    className={`px-4 py-2 text-white bg-[#375189] hover:bg-[#5b81d3] rounded ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}
+                    disabled={currentPage === 1}
+                >
+                    Previous
+                </button>
+                {getPageNumbers().map((number) => (
+                    <button
+                        key={number}
+                        onClick={() => handlePageClick(number)}
+                        className={`px-4 py-2 rounded-full ${number === currentPage ? "bg-[#375189] text-white" : "bg-gray-200 text-black"}`}
+                    >
+                        {number}
+                    </button>
+                ))}
+                <button
+                    onClick={handleNextPage}
+                    className={`px-4 py-2 text-white bg-[#375189] hover:bg-[#5b81d3] rounded ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}
+                    disabled={currentPage === totalPages}
+                >
+                    Next
+                </button>
+            </div>
         </div>
     );
 };

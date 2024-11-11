@@ -41,6 +41,37 @@ const AllCaption = () => {
         });
     }
 
+    // Pending Status Approved
+    const handleMakeStatus = (bio) => {
+        // console.log(bio,'aaaaaaa')
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Are you sure This Caption is Approved?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosPublic.patch(`/caption/approved/${bio?._id}`, { status: "Pending" })
+                    .then(res => {
+                        console.log(res.data)
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: `Caption Has been Approved.`,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        refetch()
+                    })
+            }
+            refetch()
+        });
+    }
+
+
     refetch()
 
 
@@ -55,8 +86,10 @@ const AllCaption = () => {
                     {/* head */}
                     <thead>
                         <tr className="border border-blue-300 rounded-2xl font-bold  text-xs text-white">
+                            <th>Date</th>
                             <th>Number</th>
                             <th>Caption</th>
+                            <th>Email</th>
                             <th>Status</th>
                             <th>Delete</th>
 
@@ -67,6 +100,10 @@ const AllCaption = () => {
                         {allCaption?.map(caption => <tr key={caption._id} className=" bg-blue-200 hover:bg-blue-300 rounded-2xl">
 
                             <td className="text-black font-medium">
+                                {caption.createdDate}
+                            </td>
+
+                            <td className="text-black font-medium">
                                 {caption.captionNumber}
                             </td>
 
@@ -74,10 +111,14 @@ const AllCaption = () => {
                                 {caption.caption}
                             </td>
 
+
                             <td className="text-black font-medium">
-                                {caption.status}
+                                {caption.email}
                             </td>
 
+                            <td className="px-6 py-4">
+                                {caption?.status === 'Pending' ? <button onClick={() => handleMakeStatus(caption)} className="inline-flex items-center   justify-center w-full px-4 py-3 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-500 bg-red-500 hover:bg-transparent hover:outline hover:text-black cursor-pointer">{caption?.status || "Not Premium"}</button> : <button className="inline-flex items-center   justify-center w-full px-4 py-3 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-500 bg-green-500 hover:bg-transparent hover:outline hover:text-black cursor-pointer">{caption?.status || "Not Premium"}</button>}
+                            </td>
 
                             <td className="px-6 py-4">
                                 <button onClick={() => handleDelete(caption?._id)} className="inline-flex items-center   justify-center w-full px-4 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-500 bg-indigo-600 hover:bg-transparent hover:outline hover:text-black cursor-pointer"><MdDeleteForever /></button>

@@ -19,7 +19,7 @@ import {
 
 
 const ShareButtons = ({ url, title }) => (
-  <div className="share-buttons">
+  <div className="flex gap-2 mt-2">
     <FacebookShareButton url={url} quote={title}>
       <FacebookIcon size={32} round />
     </FacebookShareButton>
@@ -98,7 +98,7 @@ const AllCard = ({ allCaption }) => {
       Swal.fire({
         position: "top-center",
         icon: "success",
-        title: `Favourite Added`,
+        title: `Favorite Added`,
         showConfirmButton: false,
         timer: 1500
       });
@@ -110,8 +110,8 @@ const AllCard = ({ allCaption }) => {
   const redirectToLogin = () => {
     Swal.fire({
       icon: "error",
-      title: "Oops...",
-      text: "Login First",
+      title: "Authentication Required",
+      text: "Please log in to add Favorite.",
       footer: '<a href="#">Why do I have this issue?</a>'
     });
     navigation('/login')
@@ -121,25 +121,30 @@ const AllCard = ({ allCaption }) => {
   const currentUrl = window.location.href;
 
   return (
-    <div className="mt-2">
+    <div className=" ">
 
-      <div className="card bg-[#16233f] text-white  justify-center">
+      <div className=" rounded-3xl bg-[#16233f] text-white  justify-center">
 
-        <div className="card-body">
-          <p className="text-rose-800 font-medium text-center">{allCaption.captionNumber}</p>
-          <h2 className="card-title text-xl text-center">
+        <div className="p-6">
+          <h2 className="text-xl text-center">
             {allCaption.caption}
           </h2>
-          <div className="card-actions justify-center mt-4">
-            <div onClick={() => handleCopy(allCaption.caption)} className="badge badge-outline p-5 hover:bg-indigo-600 cursor-pointer">Copy</div>
+          <div className="flex justify-center  mt-4">
+            <div onClick={() => handleCopy(allCaption.caption)} className="badge badge-outline p-5 hover:bg-indigo-600 cursor-pointer ">Copy</div>
 
-            <div onClick={() => handleFavoriteClick(allCaption)} className="badge badge-outline p-5 hover:bg-indigo-600 cursor-pointer "  ><BsSuitHeart /></div>
+            <div onClick={() => handleFavoriteClick(allCaption)} className="badge badge-outline p-5 hover:bg-indigo-600 cursor-pointer ml-2"  ><BsSuitHeart /></div>
 
-            <button className="badge badge-outline p-5 hover:bg-indigo-600 cursor-pointer" onClick={() => setShowShareButtons(!showShareButtons)}>
-              {showShareButtons ? 'Close Share Options' : 'Share'}
-            </button>
-            {showShareButtons && <ShareButtons url={currentUrl} title={allCaption.caption} />}
+            <div>
+              <div>
+                <button className="badge badge-outline p-5 hover:bg-indigo-600 cursor-pointer ml-2" onClick={() => setShowShareButtons(!showShareButtons)}>
+                  {showShareButtons ? 'Close Share Options' : 'Share'}
+                </button>
+              </div>
+              <div>
+                {showShareButtons && <ShareButtons url={currentUrl} title={allCaption.caption} />}
+              </div>
 
+            </div>
 
           </div>
         </div>

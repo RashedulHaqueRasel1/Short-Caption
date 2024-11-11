@@ -44,45 +44,52 @@ const Favorite = () => {
     return (
         <div className="mx-auto container mb-20">
 
-
-            <div className="overflow-x-auto">
-
-                <table className="table mt-20 lg:mt-0">
-                    {/* head */}
-                    <thead>
-                        <tr className="border border-blue-300 rounded-2xl font-bold  text-xs text-white">
-                            <th>Date</th>
-                            <th>Caption</th>
-                            <th>Delete</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* row 1 */}
-                        {allFavorite?.map(favorite => <tr key={favorite._id} className=" bg-blue-200 hover:bg-blue-300 rounded-2xl">
-
-                            <td className="text-black font-medium">
-                                {favorite.date}
-                            </td>
-
-                            <td className="text-black font-medium">
-                                {favorite.caption}
-                            </td>
-
-
-                            <td className="px-6 py-4">
-                                <button onClick={() => handleDelete(favorite?._id)} className="inline-flex items-center   justify-center w-full px-4 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-500 bg-indigo-600 hover:bg-transparent hover:outline hover:text-black cursor-pointer"><MdDeleteForever /></button>
-                            </td>
-
-                        </tr>)}
-                    </tbody>
+            <div>
+                <div>
+                    <h1 className="text-center text-3xl text-white font-bold  my-6">Favorite Caption</h1>
+                </div>
+                
+                <div className="overflow-x-auto">
 
 
 
+                    <table className="table mt-6 lg:mt-0">
+                        {/* head */}
+                        <thead>
+                            <tr className="border border-blue-300 rounded-2xl font-bold  text-xs text-white">
+                                <th>Date</th>
+                                <th>Caption</th>
+                                <th>Delete</th>
 
-                </table>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* row 1 */}
+                            {allFavorite?.map(favorite => <tr key={favorite._id} className=" bg-blue-200 hover:bg-blue-300 rounded-2xl">
+
+                                <td className="text-black font-medium">
+                                    {favorite.date}
+                                </td>
+
+                                <td className="text-black font-medium">
+                                    {favorite.caption}
+                                </td>
+
+
+                                <td className="px-6 py-4">
+                                    <button onClick={() => handleDelete(favorite?._id)} className="inline-flex items-center   justify-center w-full px-4 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-500 bg-indigo-600 hover:bg-transparent hover:outline hover:text-black cursor-pointer"><MdDeleteForever /></button>
+                                </td>
+
+                            </tr>)}
+                        </tbody>
+
+
+
+
+                    </table>
+                </div>
+
             </div>
-
 
         </div>
     );

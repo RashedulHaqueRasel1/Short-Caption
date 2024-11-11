@@ -5,7 +5,7 @@ const Footer = () => {
         <div className="">
             <footer className="footer footer-center bg-[#16233f] text-base-content p-4">
                 <aside>
-                    <p>Short Caption © {new Date().getFullYear()}  <Link to={'http://rashedul-haque-rasel.vercel.app/'} className="text-blue-300">Rashedul Haque Rasel</Link>  All Rights Reserved.</p>
+                    <p>Short Caption © {new Date().getFullYear()}  <Link to={'http://rashedul-haque-rasel.vercel.app/'} className="text-blue-300">Rashedul Haque Rasel</Link></p>
                 </aside>
             </footer>
         </div>

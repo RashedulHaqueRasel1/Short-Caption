@@ -35,11 +35,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'aRasel',
-                element: <AddCaption></AddCaption>
+                element: <PrivetRoute><AddCaption></AddCaption></PrivetRoute>
             },
             {
                 path: 'dRasel',
-                element: <AllCaption></AllCaption>
+                element: <PrivetRoute><AllCaption></AllCaption></PrivetRoute>
             },
             {
                 path: 'favorite',
