@@ -9,6 +9,7 @@ import AllCaption from "../component/AllCaption/AllCaption";
 import Favorite from "../component/Favorite/Favorite";
 import Profile from "../component/Profile/Profile";
 import PrivetRoute from "./PrivetRoute";
+import LastVisit from "../component/Admin/LastVisit/LastVisit";
 
 
 export const router = createBrowserRouter([
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
             {
                 path: 'profile',
                 element: <PrivetRoute><Profile></Profile></PrivetRoute>
+            },
+            {
+                path: "last-visit",
+                element: <LastVisit></LastVisit>
             }
         ]
     }
