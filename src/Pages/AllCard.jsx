@@ -4,6 +4,7 @@ import { AuthContext } from "../Auth/Provider/AuthProvider";
 import useAxiosSecure from "../useHook/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import toast from 'react-hot-toast';
 
 // import icon
 import {
@@ -59,13 +60,7 @@ const AllCard = ({ allCaption }) => {
   // copy Caption
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text).then(() => {
-      Swal.fire({
-        position: "top-center",
-        icon: "success",
-        title: "Text copied to clipboard!",
-        showConfirmButton: false,
-        timer: 1500
-      });
+      toast.success('Caption copied to clipboard!')
     });
   };
 

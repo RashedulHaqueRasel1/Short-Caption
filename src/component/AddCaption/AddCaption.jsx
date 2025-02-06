@@ -12,7 +12,7 @@ const AddCaption = () => {
     const { user } = useContext(AuthContext);
     const { email } = user;
     // React hook From
-    const { register, handleSubmit, formState: { errors }, } = useForm();
+    const { register, handleSubmit, formState: { errors },reset  } = useForm();
 
 
 
@@ -77,6 +77,8 @@ const AddCaption = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
+
+            reset();
 
 
         }

@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../../hook/useAxiosPublic";
 import { MdDeleteForever } from "react-icons/md";
 import useCaption from "../../hook/useCaption";
+import { useState } from "react";
 
 const AllCaption = () => {
 
@@ -51,7 +52,7 @@ const AllCaption = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, Approved it!"
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosPublic.patch(`/caption/approved/${bio?._id}`, { status: "Pending" })
@@ -75,10 +76,51 @@ const AllCaption = () => {
     refetch()
 
 
+
+
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+
+    // Pagination calculations
+    const totalPages = Math.ceil(allCaption.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const currentCaption = allCaption.slice(startIndex, startIndex + itemsPerPage);
+
+    const handlePageClick = (pageNumber) => setCurrentPage(pageNumber);
+    const handlePreviousPage = () => {
+        if (currentPage > 1) setCurrentPage(currentPage - 1);
+    };
+    const handleNextPage = () => {
+        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    };
+
+    const getPageNumbers = () => {
+        const pageNumbers = [];
+        const maxVisiblePages = 3;
+        let startPage = Math.max(1, currentPage - 1);
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+        if (endPage - startPage < maxVisiblePages - 1) {
+            startPage = Math.max(1, endPage - (maxVisiblePages - 1));
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            pageNumbers.push(i);
+        }
+
+        return pageNumbers;
+    };
+
+
     // console.log(allCaption)
 
     return (
-        <div>
+        <div className="mx-auto container">
+
+            <div className="py-6 flex justify-center text-4xl font-semibold text-white">
+                <h1>All Caption</h1>
+            </div>
 
             <div className="overflow-x-auto">
 
@@ -97,7 +139,7 @@ const AllCaption = () => {
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        {allCaption?.map(caption => <tr key={caption._id} className=" bg-blue-200 hover:bg-blue-300 rounded-2xl">
+                        {currentCaption?.map(caption => <tr key={caption._id} className=" bg-blue-200 hover:bg-blue-300 rounded-2xl">
 
                             <td className="text-black font-medium">
                                 {caption.createdDate}
@@ -131,6 +173,35 @@ const AllCaption = () => {
 
 
                 </table>
+
+
+
+                {/* Pagination */}
+                <div className="flex justify-center mt-6 mb-8 gap-2">
+                    <button
+                        onClick={handlePreviousPage}
+                        className={`px-4 py-2 text-white bg-[#375189] hover:bg-[#5b81d3] rounded ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}
+                        disabled={currentPage === 1}
+                    >
+                        Previous
+                    </button>
+                    {getPageNumbers().map((number) => (
+                        <button
+                            key={number}
+                            onClick={() => handlePageClick(number)}
+                            className={`px-4 py-2 rounded-full ${number === currentPage ? "bg-[#375189] text-white" : "bg-gray-200 text-black"}`}
+                        >
+                            {number}
+                        </button>
+                    ))}
+                    <button
+                        onClick={handleNextPage}
+                        className={`px-4 py-2 text-white bg-[#375189] hover:bg-[#5b81d3] rounded ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}
+                        disabled={currentPage === totalPages}
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
 
 

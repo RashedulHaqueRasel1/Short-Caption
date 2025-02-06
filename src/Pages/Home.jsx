@@ -1,13 +1,12 @@
 import { useContext, useState, useEffect } from "react";
 import AllCard from "./AllCard";
 import useAllCaption from "../hook/useAllCaption";
-// import { useForm } from "react-hook-form";
 import { AuthContext } from "../Auth/Provider/AuthProvider";
 import Search from "./Search";
-// import { IoSearch } from "react-icons/io5";
+import { Toaster } from 'react-hot-toast';
+
 
 const Home = () => {
-    // const [search, setSearch] = useState('');
     const [shuffledCaptions, setShuffledCaptions] = useState([]);
 
     // Fetch captions with search and pagination
@@ -19,18 +18,13 @@ const Home = () => {
         if (allCaption.length > 0) {
             const shuffled = [...allCaption].sort(() => Math.random() - 0.5);
             setShuffledCaptions(shuffled);
-            
+
         }
     }, [allCaption]);
 
     refetch()
 
-    // // Search Bar Handle
-    // const { register, handleSubmit } = useForm();
-    // const onSubmit = (data) => {
-    //     // setSearch(data.search);
-    //     refetch();
-    // };
+ 
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 9;
@@ -118,6 +112,7 @@ const Home = () => {
                     Next
                 </button>
             </div>
+            <Toaster />
         </div>
     );
 };

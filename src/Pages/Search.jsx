@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useAllCaption from "../hook/useAllCaption";
+import { FaCopy } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const Search = () => {
-    const [allCaption, refetch] = useAllCaption();
+    const [allCaption] = useAllCaption();
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleChange = (event) => {
@@ -14,10 +16,16 @@ const Search = () => {
         prod.caption.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const handleClick = () => {
-        setSearchTerm("");
-        refetch();
+
+    // copy Caption
+    const handleCopy = (text) => {
+        navigator.clipboard.writeText(text).then(() => {
+            toast.success('Caption copied to clipboard!')
+        });
+
     };
+
+
 
     return (
         <div className="relative w-full max-w-lg mx-auto lg:mx-0 lg:ml-96">
@@ -42,15 +50,19 @@ const Search = () => {
                             return (
                                 <Link
                                     key={result._id}
-                                    className="flex justify-start items-center gap-4 p-2 shadow-md rounded-lg border bg-blue-400 hover:bg-gray-100 transition-colors duration-200"
-                                    onClick={handleClick}
+                                    className="flex justify-start items-center gap-4 p-2 shadow-md rounded-lg border bg-blue-400 hover:bg-gray-100 transition-colors duration-200  text-black"
+                                    onClick={() => handleCopy(result.caption)}
+
                                 >
                                     <section className="w-full lg:w-2/3 text-sm lg:text-base space-y-1 ">
-                                        <p className="font-bold text-sm lg:text-base">
+                                        <p className="font-bold text-sm lg:text-base ">
                                             {truncateName(result.caption, 16)}
                                         </p>
                                         <p className="text-gray-600">{result.caption}</p>
+
                                     </section>
+                                    
+                                    <FaCopy className="text-black" />
                                 </Link>
                             );
                         })
