@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../../hook/useAxiosPublic";
 import { MdDeleteForever } from "react-icons/md";
 import useCaption from "../../hook/useCaption";
-import { useState } from "react";
+import {  useState } from "react";
 
 const AllCaption = () => {
 
@@ -115,11 +115,14 @@ const AllCaption = () => {
 
     // console.log(allCaption)
 
+
+
     return (
         <div className="mx-auto container">
 
             <div className="py-6 flex justify-center text-4xl font-semibold text-white">
-                <h1>All Caption</h1>
+                {/* <h1>All Caption </h1> */}
+                {/* <p>Total Visitors: {totalVisits}</p> */}
             </div>
 
             <div className="overflow-x-auto">
@@ -163,7 +166,7 @@ const AllCaption = () => {
                             </td>
 
                             <td className="px-6 py-4">
-                                <button onClick={() => handleDelete(caption?._id)} className="inline-flex items-center   justify-center w-full px-4 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-500 bg-indigo-600 hover:bg-transparent hover:outline hover:text-black cursor-pointer"><MdDeleteForever /></button>
+                                <button onClick={() => handleDelete(caption?._id)} className="inline-flex items-center   justify-center w-full px-4 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-500 bg-red-600 hover:bg-transparent hover:outline hover:text-black cursor-pointer"><MdDeleteForever /></button>
                             </td>
 
                         </tr>)}

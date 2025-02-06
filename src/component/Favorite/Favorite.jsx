@@ -2,6 +2,9 @@ import { MdDeleteForever } from "react-icons/md";
 import useAllFavorite from "../../hook/useAllFavorite";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../useHook/useAxiosSecure";
+import toast from "react-hot-toast";
+import { FaCopy } from "react-icons/fa";
+import { Toaster } from 'react-hot-toast';
 
 const Favorite = () => {
 
@@ -39,6 +42,15 @@ const Favorite = () => {
     }
 
 
+    // copy Caption
+    const handleCopy = (text) => {
+        navigator.clipboard.writeText(text).then(() => {
+            toast.success('Caption copied to clipboard!')
+        });
+
+    };
+
+
 
 
     return (
@@ -48,7 +60,7 @@ const Favorite = () => {
                 <div>
                     <h1 className="text-center text-3xl text-white font-bold  my-6">Favorite Caption</h1>
                 </div>
-                
+
                 <div className="overflow-x-auto">
 
 
@@ -59,6 +71,7 @@ const Favorite = () => {
                             <tr className="border border-blue-300 rounded-2xl font-bold  text-xs text-white">
                                 <th>Date</th>
                                 <th>Caption</th>
+                                <th>Copy</th>
                                 <th>Delete</th>
 
                             </tr>
@@ -76,8 +89,13 @@ const Favorite = () => {
                                 </td>
 
 
+
+
                                 <td className="px-6 py-4">
-                                    <button onClick={() => handleDelete(favorite?._id)} className="inline-flex items-center   justify-center w-full px-4 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-500 bg-indigo-600 hover:bg-transparent hover:outline hover:text-black cursor-pointer"><MdDeleteForever /></button>
+                                    <button onClick={() => handleCopy(favorite.caption)} className="inline-flex items-center   justify-center w-full px-4 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-500 bg-indigo-600 hover:bg-transparent hover:outline hover:text-black cursor-pointer"><FaCopy /></button>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <button onClick={() => handleDelete(favorite?._id)} className="inline-flex items-center   justify-center w-full px-4 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-500 bg-red-500 hover:bg-transparent hover:outline hover:text-black cursor-pointer"><MdDeleteForever /></button>
                                 </td>
 
                             </tr>)}
@@ -90,6 +108,7 @@ const Favorite = () => {
                 </div>
 
             </div>
+            <Toaster />
 
         </div>
     );

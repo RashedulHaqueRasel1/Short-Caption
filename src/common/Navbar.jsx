@@ -36,6 +36,10 @@ const Navbar = () => {
 
 
                 <li>
+                    <NavLink to={'/Add/Caption'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600'>Add Caption</NavLink>
+                </li>
+
+                <li>
                     <NavLink to={'/favorite'} className='inline-flex items-center justify-center w-full px-7 py-4 text-base font-bold leading-6 text-white  border-transparent rounded-full md:w-auto hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600'>Favorite</NavLink>
                 </li>
 

@@ -24,7 +24,7 @@ const Home = () => {
 
     refetch()
 
- 
+
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 9;
@@ -59,6 +59,20 @@ const Home = () => {
         return pageNumbers;
     };
 
+
+    // Total Visitor Count with Ip Address
+    const [totalVisits, setTotalVisits] = useState(0);
+
+    useEffect(() => {
+        // Call the API when user visits
+        fetch("https://short-caption-server.vercel.app/get-user-visits").then(() => {
+            fetch("https://short-caption-server.vercel.app/get-visits")
+                .then((res) => res.json())
+                .then((data) => setTotalVisits(data.totalVisits));
+        });
+    }, []);
+
+
     // Show loading indicator
     if (loading) {
         return (
@@ -79,15 +93,17 @@ const Home = () => {
                 <Search></Search>
             </div>
 
+
+
             {/* Caption Cards */}
-            <div className="grid grid-cols-1 justify-center p-4 gap-4 lg:mt-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 justify-center p-4 gap-4 lg:mt-4 md:grid-cols-2 lg:grid-cols-3 ">
                 {currentCaption.map((caption) => (
                     <AllCard key={caption._id} allCaption={caption} />
                 ))}
             </div>
 
             {/* Pagination */}
-            <div className="flex justify-center mt-6 mb-8 gap-2">
+            <div className="flex justify-center mt-6 mb-2 gap-2">
                 <button
                     onClick={handlePreviousPage}
                     className={`px-4 py-2 text-white bg-[#375189] hover:bg-[#5b81d3] rounded ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}
@@ -111,6 +127,10 @@ const Home = () => {
                 >
                     Next
                 </button>
+            </div>
+
+            <div className="flex justify-center py-4">
+                <p>Total Visitors:   {totalVisits}</p>
             </div>
             <Toaster />
         </div>

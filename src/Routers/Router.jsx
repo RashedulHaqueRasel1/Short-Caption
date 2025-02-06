@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
                 element: <Contact></Contact>
             },
             {
-                path: 'aRasel',
+                path: 'Add/Caption',
                 element: <PrivetRoute><AddCaption></AddCaption></PrivetRoute>
             },
             {

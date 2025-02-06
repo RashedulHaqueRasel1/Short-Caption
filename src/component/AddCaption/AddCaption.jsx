@@ -12,7 +12,7 @@ const AddCaption = () => {
     const { user } = useContext(AuthContext);
     const { email } = user;
     // React hook From
-    const { register, handleSubmit, formState: { errors },reset  } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
 
 
@@ -102,9 +102,10 @@ const AddCaption = () => {
                             <label className="label">
                                 <span className="label-text   font-bold">Caption</span>
                             </label>
-                            <div  >
-                                <textarea type="textarea" name="caption" placeholder="Write Your Caption" className="input input-bordered border rounded-xl border-blue-300 w-full  "   {...register("caption", { required: true })}></textarea>
-                                {errors.caption && <span className="text-red-600 font-bold  ">This field is required</span>}
+                            <div className="grid">
+                                <textarea type="textarea" name="caption" placeholder="Write Your Caption . . ." className="input input-bordered border rounded-xl border-blue-300 w-full lg:ml-4  lg:w-[600px]  "   {...register("caption", { required: true })}></textarea>
+
+                                {errors.caption && <span className="text-red-600 font-bold  lg:ml-4 mt-2">This field is required</span>}
 
                             </div>
 
@@ -126,7 +127,9 @@ const AddCaption = () => {
                     </div>
 
 
-                    <button className="btn w-full hover:outline text-[16px] bg-indigo-600 hover:bg-transparent text-white hover:text-black mr-3"  >Added Caption</button>
+                    <div className="flex justify-center">
+                        <button className="btn  hover:outline text-[16px] bg-indigo-600 hover:bg-transparent text-white mr-3"  >Added Caption</button>
+                    </div>
 
                 </form>
 
